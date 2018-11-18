@@ -1,3 +1,6 @@
 *~
 build
 rootfs
+.idea/
+venv/
+airflow/requirements.lock

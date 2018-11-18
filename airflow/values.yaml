@@ -14,8 +14,8 @@ airflow:
   # set the max number of retries during container initialization
   init_retry_loop:
   # base image for webserver/scheduler/workers
-  image: puckel/docker-airflow
-  imageTag: 1.9.0
+  image: popoaq/docker-airflow
+  imageTag: first
   # image_pull_policy: Always or IfNotPresent
   image_pull_policy: IfNotPresent
   # Set scheduler_num_runs to control how the schduler behaves:

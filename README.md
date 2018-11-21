@@ -1,3 +1,7 @@
+# fork of kube-airflow 
+repo modified for demo purposes. using local executor. remove redis and extra workers. 
+
+
 # kube-airflow (Celery Executor)
 [![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg)](https://hub.docker.com/r/stibbons31/kube-airflow/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/stibbons31/kube-airflow.svg?maxAge=2592000)]()

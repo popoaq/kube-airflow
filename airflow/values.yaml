@@ -13,11 +13,11 @@ airflow:
   dag_path: /dags
   # set the max number of retries during container initialization
   init_retry_loop:
-  # base image for webserver/scheduler/workers
+  # base image for webserver/scheduler/`workers
   image: popoaq/docker-airflow
-  imageTag: first
+  imageTag: local
   # image_pull_policy: Always or IfNotPresent
-  image_pull_policy: IfNotPresent
+  image_pull_policy: Always
   # Set scheduler_num_runs to control how the schduler behaves:
   #   -1 will let him looping indefinitively but it will never update the DAG
   #   1 will have the scheduler quit after each refresh, but kubernetes will restart it
@@ -28,9 +28,9 @@ airflow:
   url_prefix: "/airflow"
   config: {}
 
-celery:
-  # Number of celery workers to initialize
-  num_workers: 1
+#celery:
+#  # Number of celery workers to initialize
+#  num_workers: 1
 
 ingress:
   # enable ingress
@@ -94,34 +94,6 @@ persistence:
   accessMode: ReadWriteOnce
   size: 1Gi
 
-
-flower:
-  # Url prefix for the endpoint of Flower
-  # Ex: http://mycompany.com/airflow/flower
-  # url_prefix is /airflow/flower
-  url_prefix: "/flower"
-
-dags:
-  # pickle_dag: send DAG using pickle from the scheduler to the worker
-  pickle_dag: true
-  # Use of git-sync: beware when using git-sync and airflow. If the scheduler reloads a dag in the
-  # middle of a dagrun then the dagrun will actually start using the new version of the dag in the
-  # middle of execution.
-  # This is a known issue with airflow and it means it's unsafe in general to use a git-sync
-  # like solution with airflow without:
-  # - using explicit locking, ie never pull down a new dag if a dagrun is in progress
-  # - make dags immutable, never modify your dag always make a new one
-  git_sync_enabled: false
-  # url to clone the git repository
-  git_repo:
-  # branch name
-  git_branch: master
-  poll_interval_sec: 60
-  # print debug logs
-  git_sync_debug: false
-  # Disable Load examples as soon as you enable git_repo
-  load_examples: true
-
 ## Configuration values for the postgresql dependency.
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
 ##
@@ -156,10 +128,10 @@ postgresql:
   persistence:
     ## Enable PostgreSQL persistence using Persistent Volume Claims.
     ##
-    enabled: true
+    enabled: false
 
 redis:
-  enabled: true
+  enabled: false
   redisPassword: redis
   persistence:
     enabled: true
